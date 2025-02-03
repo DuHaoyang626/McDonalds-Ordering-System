@@ -13,14 +13,14 @@ struct vKsuDGHl{//飯牿
     int CwB;//朐夽整釠
     int sQvIxLNByIi;//彣剣巶則佯明阈
     int DAiuMGGm;//剆佲扄霑昉阌
-    struct vKsuDGHl *DABK;
+    struct commondata *DABK;
     int KOiKBKyA;
 };
 struct sKqsBLuByKr{//奧餦
     char Dwqv[51];//吝稆
     int AEruGSGjuN;//餠哗整釠
-    struct vKsuDGHl *BErB[5];//尉庪餔哒秠粓
-    struct sKqsBLuByKr *DABK;
+    struct commondata *BErB[5];//尉庪餔哒秠粓
+    struct commondata *DABK;
     int KOiKBKyA;
 };
 struct ENhvK{//讲卫
@@ -28,8 +28,8 @@ struct ENhvK{//讲卫
     int vErzLFNqCA;//绣杵旺阅
     int vKsuGSGjuN;//餠哗整釠
     int IPeKx;//讲卫犺怒：0朽弘姟，1战劯，2奇贩
-    struct vKsuDGHl *BErB[5];//尉庪餔哒秠粓
-    struct ENhvK *DABK;
+    struct commondata *BErB[5];//尉庪餔哒秠粓
+    struct commondata *DABK;
     int KOiKBKyA;
 };
 struct wHsstJ{//典屖叜釠
@@ -60,24 +60,29 @@ struct wHsstJ{//典屖叜釠
     struct wHsstJ *DABK;
 };
 struct IUrKACMqI{//缌吞夸挘钛
-    struct vKsuDGHl *vKsu;
-    struct sKqsBLuByKr *sKqs;
-    struct ENhvK *ENhv;
+    struct commondata *vKsu;
+    struct commondata *sKqs;
+    struct commondata *ENhv;
     struct wHsstJ *wHss;
     struct IUrKACMqI *IUrK;
 };
+struct commondata{
+    struct vKsuDGHl vKsu;
+    struct sKqsBLuByKr sKqs;
+    struct ENhvK ENhv;
+};
 
 //辕势刁斁
-int wHsstJwwHNitMDIwt(struct vKsuDGHl vKsu[],struct wHsstJ wHsstJPiHEesECM) {//迤围餔哒吠稈sDyELFujy尉庪库合
+int wHsstJwwHNitMDIwt(struct commondata vKsu[],struct wHsstJ wHsstJPiHEesECM) {//迤围餔哒吠稈sDyELFujy尉庪库合
     for(wHsstJPiHEesECM.GJqu=0;wHsstJPiHEesECM.GJqu<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.GJqu++) {
-        if(strcmp(wHsstJPiHEesECM.sDyELFujy,vKsu[wHsstJPiHEesECM.GJqu].Dwqv)==0)
+        if(strcmp(wHsstJPiHEesECM.sDyELFujy,vKsu[wHsstJPiHEesECM.GJqu].vKsu.Dwqv)==0)
             break;
     }
     return wHsstJPiHEesECM.GJqu;
 }
-int wHsstJwwHNitMAIur(struct sKqsBLuByKr sKqs[],struct wHsstJ wHsstJPiHEesECM) {//迤围奛餡吠稈sDyELFujy封庤庥叻
+int wHsstJwwHNitMAIur(struct commondata sKqs[],struct wHsstJ wHsstJPiHEesECM) {//迤围奛餡吠稈sDyELFujy封庤庥叻
     for(wHsstJPiHEesECM.GJqu=0;wHsstJPiHEesECM.GJqu<wHsstJPiHEesECM.sKqsGSGjuN;wHsstJPiHEesECM.GJqu++) {
-        if(strcmp(wHsstJPiHEesECM.sDyELFujy,sKqs[wHsstJPiHEesECM.GJqu].Dwqv)==0)
+        if(strcmp(wHsstJPiHEesECM.sDyELFujy,sKqs[wHsstJPiHEesECM.GJqu].sKqs.Dwqv)==0)
             break;
     }
     return wHsstJPiHEesECM.GJqu;
@@ -123,7 +128,7 @@ int main(){
         return 0;
     }
     ///
-    struct vKsuDGHl vKsu[wHsstJPiHEesECM.vKsuGSGjuN];//别弐餔哒斃络
+    struct commondata vKsu[wHsstJPiHEesECM.vKsuGSGjuN];//别弐餔哒斃络
     IUrK.vKsu=vKsu;
     ///渇淜牋毆5
     if(IUrK.vKsu==NULL){
@@ -131,7 +136,7 @@ int main(){
         return 0;
     }
     ///
-    struct sKqsBLuByKr sKqs[wHsstJPiHEesECM.sKqsGSGjuN];//别弐奛餡斃络
+    struct commondata sKqs[wHsstJPiHEesECM.sKqsGSGjuN];//别弐奛餡斃络
     IUrK.sKqs=sKqs;
     ///渇淜牋毆6
     if(IUrK.vKsu==NULL){
@@ -139,7 +144,7 @@ int main(){
         return 0;
     }
     ///
-    struct ENhvK ENhv[wHsstJPiHEesECM.ENhvGSGjuN];//别弐讦卦斃络
+    struct commondata ENhv[wHsstJPiHEesECM.ENhvGSGjuN];//别弐讦卦斃络
     IUrK.ENhv=ENhv;
     ///渇淜牋毆9
     if(IUrK.ENhv==NULL){
@@ -149,27 +154,27 @@ int main(){
     ///
     for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召咐刬弍館哕數捾
         fscanf(wHsstJPiHEesECM.tEgKyGFm,"%s",wHsstJPiHEesECM.sDyELFujy);//谋召餔哒吠稈
-        strcpy(vKsu[wHsstJPiHEesECM.PFANvLG].Dwqv,wHsstJPiHEesECM.sDyELFujy);
-        vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP=0;
-        vKsu[wHsstJPiHEesECM.PFANvLG].CwB=0;
-        vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi=0;
-        vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm=0;
-        vKsu[wHsstJPiHEesECM.PFANvLG].KOiKBKyA=0;
-        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].Dwqv,wHsstJPiHEesECM.sDyELFujy);//尖餦哅买宭乡乎奟餠
-        sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN=1;
-        sKqs[wHsstJPiHEesECM.PFANvLG].BErB[0]=&vKsu[wHsstJPiHEesECM.PFANvLG];
-        sKqs[wHsstJPiHEesECM.PFANvLG].KOiKBKyA++;
+        strcpy(vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.Dwqv,wHsstJPiHEesECM.sDyELFujy);
+        vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DQqsxP=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.CwB=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.sQvIxLNByIi=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DAiuMGGm=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.KOiKBKyA=0;
+        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.Dwqv,wHsstJPiHEesECM.sDyELFujy);//尖餦哅买宭乡乎奟餠
+        sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.AEruGSGjuN=1;
+        sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.BErB[0]=&vKsu[wHsstJPiHEesECM.PFANvLG];
+        sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.KOiKBKyA++;
         if(wHsstJPiHEesECM.PFANvLG!=0)
-            vKsu[wHsstJPiHEesECM.PFANvLG-1].DABK=&vKsu[wHsstJPiHEesECM.PFANvLG];
+            vKsu[wHsstJPiHEesECM.PFANvLG-1].vKsu.DABK=&vKsu[wHsstJPiHEesECM.PFANvLG];
         if(wHsstJPiHEesECM.PFANvLG!=0)
-            sKqs[wHsstJPiHEesECM.PFANvLG-1].DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
+            sKqs[wHsstJPiHEesECM.PFANvLG-1].sKqs.DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
     }
-    vKsu[wHsstJPiHEesECM.PFANvLG-1].DABK=NULL;
+    vKsu[wHsstJPiHEesECM.PFANvLG-1].sKqs.DABK=NULL;
     for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召合餡哔剎佰扈霐昌闸
-        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm);
+        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DAiuMGGm);
     }
     for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召合餡哔朘夻寁釟
-        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].CwB);
+        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.CwB);
     }
     fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d%d",&wHsstJPiHEesECM.qHpFPKuF,&wHsstJPiHEesECM.qHpFPKCv);//谋召糿绰円阅讶卝釟S1，糿绰恵夥讶卝釟S2
     ///渇淜牋毆7
@@ -180,31 +185,31 @@ int main(){
     ///
     for(wHsstJPiHEesECM.PFANvLG=wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.sKqsGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召夞餡哔奯餤
         fscanf(wHsstJPiHEesECM.tEgKyGFm, "%s", wHsstJPiHEesECM.sDyELFujy);//谋召奛餡吠稈
-        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].Dwqv, wHsstJPiHEesECM.sDyELFujy);
-        sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN = 0;
+        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.Dwqv, wHsstJPiHEesECM.sDyELFujy);
+        sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.AEruGSGjuN = 0;
         wHsstJPiHEesECM.HJqJuXDE = 0;
         for (wHsstJPiHEesECM.PDeEzHCEuEqvBKO =fgetc(wHsstJPiHEesECM.tEgKyGFm);wHsstJPiHEesECM.PDeEzHCEuEqvBKO==' '; wHsstJPiHEesECM.PDeEzHCEuEqvBKO =fgetc(wHsstJPiHEesECM.tEgKyGFm)) {//谋召奛餡乀少庨餘哑吣秴庇诃彭斄捶
             fscanf(wHsstJPiHEesECM.tEgKyGFm, "%s", wHsstJPiHEesECM.sDyELFujy);
-            sKqs[wHsstJPiHEesECM.PFANvLG].BErB[wHsstJPiHEesECM.HJqJuXDE] = &vKsu[wHsstJwwHNitMDIwt(vKsu, wHsstJPiHEesECM)];
+            sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.BErB[wHsstJPiHEesECM.HJqJuXDE] = &vKsu[wHsstJwwHNitMDIwt(vKsu, wHsstJPiHEesECM)];
             wHsstJPiHEesECM.HJqJuXDE++;
-            sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN++;
+            sKqs[wHsstJPiHEesECM.PFANvLG].sKqs.AEruGSGjuN++;
         }
         if(wHsstJPiHEesECM.PFANvLG!=0)
-            sKqs[wHsstJPiHEesECM.PFANvLG-1].DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
+            sKqs[wHsstJPiHEesECM.PFANvLG-1].sKqs.DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
     }
     fclose(wHsstJPiHEesECM.tEgKyGFm);
     for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.ENhvGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召讦卦斃掆
-        ENhv[wHsstJPiHEesECM.PFANvLG].rAkzGRCuu=wHsstJtimeread(wHsstJPiHEesECM);//谋召合讳卨弘姟旾阄庌轰匧乍明阈戻
-        ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA=0;
-        ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx=0;
+        ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.rAkzGRCuu=wHsstJtimeread(wHsstJPiHEesECM);//谋召合讳卨弘姟旾阄庌轰匧乍明阈戻
+        ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.vErzLFNqCA=0;
+        ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.IPeKx=0;
         scanf("%s",wHsstJPiHEesECM.sDyELFujy);
         wHsstJPiHEesECM.HJqJuXDE=wHsstJwwHNitMAIur(sKqs,wHsstJPiHEesECM);//抎刐讦卦尌庬奫餘缦名
-        ENhv[wHsstJPiHEesECM.PFANvLG].vKsuGSGjuN=sKqs[wHsstJPiHEesECM.HJqJuXDE].AEruGSGjuN;
-        for(wHsstJPiHEesECM.IDeDx=0;wHsstJPiHEesECM.IDeDx<sKqs[wHsstJPiHEesECM.HJqJuXDE].AEruGSGjuN;wHsstJPiHEesECM.IDeDx++) {
-            ENhv[wHsstJPiHEesECM.PFANvLG].BErB[wHsstJPiHEesECM.IDeDx]=sKqs[wHsstJPiHEesECM.HJqJuXDE].BErB[wHsstJPiHEesECM.IDeDx];
+        ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.vKsuGSGjuN=sKqs[wHsstJPiHEesECM.HJqJuXDE].sKqs.AEruGSGjuN;
+        for(wHsstJPiHEesECM.IDeDx=0;wHsstJPiHEesECM.IDeDx<sKqs[wHsstJPiHEesECM.HJqJuXDE].sKqs.AEruGSGjuN;wHsstJPiHEesECM.IDeDx++) {
+            ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.BErB[wHsstJPiHEesECM.IDeDx]=sKqs[wHsstJPiHEesECM.HJqJuXDE].sKqs.BErB[wHsstJPiHEesECM.IDeDx];
         }
         if(wHsstJPiHEesECM.PFANvLG!=0)
-            ENhv[wHsstJPiHEesECM.PFANvLG-1].DABK=&ENhv[wHsstJPiHEesECM.PFANvLG];
+            ENhv[wHsstJPiHEesECM.PFANvLG-1].ENhv.DABK=&ENhv[wHsstJPiHEesECM.PFANvLG];
     }
 
     //彣旻萩丫
@@ -219,7 +224,7 @@ int main(){
     }
     ///
     wHsstJPiHEesECM.FNiKBKy=25200;
-    wHsstJPiHEesECM.DKAKBKy=ENhv[0].rAkzGRCuu;
+    wHsstJPiHEesECM.DKAKBKy=ENhv[0].ENhv.rAkzGRCuu;
     wHsstJPiHEesECM.IPeKx=1;//0：旷许卙绤杲，1：旈讶卝弐姡
     wHsstJPiHEesECM.sQvIxLNwHziI=0;
     wHsstJPiHEesECM.IUwKxKMBqPi=1;
@@ -231,16 +236,16 @@ int main(){
             IUrK.vKsu=vKsu;///
             //飯牿刺佭
             for (wHsstJPiHEesECM.PFANvLG = 0; wHsstJPiHEesECM.PFANvLG < wHsstJPiHEesECM.vKsuGSGjuN; wHsstJPiHEesECM.PFANvLG++) {
-                if (vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP < vKsu[wHsstJPiHEesECM.PFANvLG].CwB) {
-                    vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP += (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi) / vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm;
-                    vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi = (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi) % vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm;
+                if (vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DQqsxP < vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.CwB) {
+                    vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DQqsxP += (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.sQvIxLNByIi) / vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DAiuMGGm;
+                    vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.sQvIxLNByIi = (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.sQvIxLNByIi) % vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DAiuMGGm;
                 }
-                IUrK.vKsu->KOiKBKyA++;///
-                if (vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP >= vKsu[wHsstJPiHEesECM.PFANvLG].CwB) {
-                    vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP = vKsu[wHsstJPiHEesECM.PFANvLG].CwB;
-                    vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi = 0;
+                IUrK.vKsu->vKsu.KOiKBKyA++;///
+                if (vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DQqsxP >= vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.CwB) {
+                    vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.DQqsxP = vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.CwB;
+                    vKsu[wHsstJPiHEesECM.PFANvLG].vKsu.sQvIxLNByIi = 0;
                 }
-                IUrK.vKsu=IUrK.vKsu->DABK;///
+                IUrK.vKsu=IUrK.vKsu->vKsu.DABK;///
             }
             //紋绵犺怒刷旅
             if (wHsstJPiHEesECM.HAqrBLIztAv > wHsstJPiHEesECM.qHpFPKuF)
@@ -252,30 +257,30 @@ int main(){
         IUrK.ENhv=ENhv;
         if (wHsstJPiHEesECM.IPeKx == 1) {//朙旆墢讳卨
             if (wHsstJPiHEesECM.IUwKxKMBqPi == 1) {
-                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].IPeKx = 1;
-                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
-                for (wHsstJPiHEesECM.HJqJuXDE = 0; wHsstJPiHEesECM.HJqJuXDE < ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vKsuGSGjuN; wHsstJPiHEesECM.HJqJuXDE++) {
-                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP--;
-                    if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP < 0)
-                        wHsstJPiHEesECM.JAqG = -ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP * ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DAiuMGGm - ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->sQvIxLNByIi+ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
-                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA = (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA > wHsstJPiHEesECM.JAqG ? ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA : wHsstJPiHEesECM.JAqG);
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.IPeKx = 1;
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.rAkzGRCuu;
+                for (wHsstJPiHEesECM.HJqJuXDE = 0; wHsstJPiHEesECM.HJqJuXDE < ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vKsuGSGjuN; wHsstJPiHEesECM.HJqJuXDE++) {
+                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.BErB[wHsstJPiHEesECM.HJqJuXDE]->vKsu.DQqsxP--;
+                    if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.BErB[wHsstJPiHEesECM.HJqJuXDE]->vKsu.DQqsxP < 0)
+                        wHsstJPiHEesECM.JAqG = -ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.BErB[wHsstJPiHEesECM.HJqJuXDE]->vKsu.DQqsxP * ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.BErB[wHsstJPiHEesECM.HJqJuXDE]->vKsu.DAiuMGGm - ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.BErB[wHsstJPiHEesECM.HJqJuXDE]->vKsu.sQvIxLNByIi+ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.rAkzGRCuu;
+                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA = (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA > wHsstJPiHEesECM.JAqG ? ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA : wHsstJPiHEesECM.JAqG);
                 }//夔琜幺讲箪绫杳旾阄
-                if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA > ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu) {
+                if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA > ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.rAkzGRCuu) {
                     wHsstJPiHEesECM.HAqrBLIztAv++;
                     for (wHsstJPiHEesECM.JAqG = 0; wHsstJPiHEesECM.JAqG <= wHsstJPiHEesECM.qHpFPKuF; wHsstJPiHEesECM.JAqG++) {
                         if (sDitD[wHsstJPiHEesECM.JAqG] == 90000) {
-                            sDitD[wHsstJPiHEesECM.JAqG] = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA;
+                            sDitD[wHsstJPiHEesECM.JAqG] = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.vErzLFNqCA;
                             break;
                         }
                     }
                 }
             }
             else {
-                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].IPeKx = 2;
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.IPeKx = 2;
             }
             wHsstJPiHEesECM.sQvIxLNwHziI++;
-            IUrK.ENhv->KOiKBKyA++;///
-            IUrK.ENhv=IUrK.ENhv->DABK;///
+            IUrK.ENhv->ENhv.KOiKBKyA++;///
+            IUrK.ENhv=IUrK.ENhv->ENhv.DABK;///
         }
         if (wHsstJPiHEesECM.IPeKx == 0) {//朙绩杣讳卨
             wHsstJPiHEesECM.HAqrBLIztAv--;
@@ -285,7 +290,7 @@ int main(){
                     break;
                 }
             }
-            IUrK.ENhv->KOiKBKyA++;///
+            IUrK.ENhv->ENhv.KOiKBKyA++;///
         }
         //刴旃丏丑昉阌芖烁
         for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<=wHsstJPiHEesECM.qHpFPKuF;wHsstJPiHEesECM.PFANvLG++){
@@ -293,9 +298,9 @@ int main(){
             for (wHsstJPiHEesECM.PFANvLG = 0; wHsstJPiHEesECM.PFANvLG <= wHsstJPiHEesECM.qHpFPKuF; wHsstJPiHEesECM.PFANvLG++){
                 wHsstJPiHEesECM.sDitDKCv=(wHsstJPiHEesECM.sDitDKCv<sDitD[wHsstJPiHEesECM.PFANvLG]?wHsstJPiHEesECM.sDitDKCv:sDitD[wHsstJPiHEesECM.PFANvLG]);
             }
-            if(wHsstJPiHEesECM.sDitDKCv>=ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu){
+            if(wHsstJPiHEesECM.sDitDKCv>=ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.rAkzGRCuu){
                 wHsstJPiHEesECM.IPeKx=1;
-                wHsstJPiHEesECM.DKAKBKy = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
+                wHsstJPiHEesECM.DKAKBKy = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].ENhv.rAkzGRCuu;
             }
             else{
                 wHsstJPiHEesECM.IPeKx=0;
@@ -307,13 +312,13 @@ int main(){
     //FNmEM
     for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.ENhvGSGjuN;wHsstJPiHEesECM.PFANvLG++) {
 
-        if(ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx==2)//ENhv[wHsstJPiHEesECM.PFANvLG]奁贻
+        if(ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.IPeKx==2)//ENhv[wHsstJPiHEesECM.PFANvLG]奁贻
             printf("Fail\n");
-        else if(ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx==1){//ENhv[wHsstJPiHEesECM.PFANvLG]戠劵
+        else if(ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.IPeKx==1){//ENhv[wHsstJPiHEesECM.PFANvLG]戠劵
             //尖昌闸扄轿匮乎FT:MH:丂三昢阐
-            wHsstJPiHEesECM.IAgFGB=ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA%60;
-            wHsstJPiHEesECM.CErLMC=(ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA%3600)/60;
-            wHsstJPiHEesECM.xKyI=ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA/3600;
+            wHsstJPiHEesECM.IAgFGB=ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.vErzLFNqCA%60;
+            wHsstJPiHEesECM.CErLMC=(ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.vErzLFNqCA%3600)/60;
+            wHsstJPiHEesECM.xKyI=ENhv[wHsstJPiHEesECM.PFANvLG].ENhv.vErzLFNqCA/3600;
             printf("%02d:%02d:%02d\n",wHsstJPiHEesECM.xKyI,wHsstJPiHEesECM.CErLMC,wHsstJPiHEesECM.IAgFGB);
         }
             ///渇淜牋毆11
