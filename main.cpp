@@ -1,25 +1,20 @@
-#include"EasyX/include/graphics.h"// 引用图形库头文件
-#include<stdio.h>
+#include <graphics.h>              // 引用图形库头文件
+#include <conio.h>
+#include <stdio.h>
+#include <windows.h>				//用到了定时函数sleep()
+#include <math.h>
+
 int main()
 {
-    initgraph(640, 480);
-    setbkcolor(WHITE);
-    cleardevice();
-    char time[9];
-    time[0] = '0';
-    time[1] = '7';
-    time[2] = ':';
-    time[3] = '0';
-    time[4] = '7';
-    time[5] = ':';
-    time[6] = '0';
-    time[7] = '7';
-    time[8] = '\0';
-    char str[500]="";
-    sprintf_s(str, "%s", time);
-    printf("%s\n%s", str, time);
-    settextcolor(RED);
-    outtextxy(100, 250,time);
-    while (true);
-    closegraph();
+    int i;
+    short win_width,win_height;//定义窗口的宽度和高度
+    win_width = 480;win_height = 360;
+    initgraph(win_width,win_height);//初始化窗口（黑屏）
+    for(i=0;i<256;i+=5)
+    {
+        setbkcolor(RGB(i,i,i));//设置背景色，原来默认黑色
+        cleardevice();//清屏（取决于背景色）
+        Sleep(15);//延时15ms
+    }
+    closegraph();//关闭绘图界面
 }
