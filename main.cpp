@@ -3,339 +3,326 @@
 //All rights reserved.
 //
 
-//头文件
+//奄斝仺
 #include<stdio.h>
 #include<string.h>
-//建立结构体
-struct foodkind{//食物
-    char name[51];//名称
-    int number;//当前数量
-    int max;//最大数量
-    int currenttime;//当前已制作时间
-    int needtime;//制作所需时间
-    struct foodkind *next;
-    int usetimes;
+//弊竡绗枕佦
+struct vKsuDGHl{//飯牿
+    char Dwqv[51];//吝稆
+    int DQqsxP;//彣剣整釠
+    int CwB;//朐夽整釠
+    int sQvIxLNByIi;//彣剣巶則佯明阈
+    int DAiuMGGm;//剆佲扄霑昉阌
+    struct vKsuDGHl *DABK;
+    int KOiKBKyA;
 };
-struct combination{//套餐
-    char name[51];//名称
-    int kindnumber;//餐品数量
-    struct foodkind *link[5];//对应餐品种类
-    struct combination *next;
-    int usetimes;
+struct sKqsBLuByKr{//奧餦
+    char Dwqv[51];//吝稆
+    int AEruGSGjuN;//餠哗整釠
+    struct vKsuDGHl *BErB[5];//尉庪餔哒秠粓
+    struct sKqsBLuByKr *DABK;
+    int KOiKBKyA;
 };
-struct order{//订单
-    int begintime;//开始时间
-    int finishtime;//结束时间
-    int foodnumber;//餐品数量
-    int state;//0未开始，1成功，2失败
-    struct foodkind *link[5];//对应餐品种类
-    struct order *next;
-    int usetimes;
+struct ENhvK{//讲卫
+    int rAkzGRCuu;//弐姡旺阅
+    int vErzLFNqCA;//绣杵旺阅
+    int vKsuGSGjuN;//餠哗整釠
+    int IPeKx;//讲卫犺怒：0朽弘姟，1战劯，2奇贩
+    struct vKsuDGHl *BErB[5];//尉庪餔哒秠粓
+    struct ENhvK *DABK;
+    int KOiKBKyA;
 };
-struct global{//全局变量
-    //建立任务处理数据
-    FILE *fp;
-    int hour1;//hh:mm:ss时间-第1位
-    int hour2;//hh:mm:ss时间-第2位
-    int minute1;//hh:mm:ss时间-第3位
-    int minute2;//hh:mm:ss时间-第4位
-    int second1;//hh:mm:ss时间-第5位
-    int second2;//hh:mm:ss时间-第6位
-    int foodnumber;//餐品种类数量
-    int combnumber;//套餐种类数量
-    int ordenumber;//订单数量
-    int allowmax;//系统关闭订单量w1
-    int allowmin;//系统恢复订单量w2
-    int remainorder;//滞留订单量
-    int systemstate;//系统开启情况，0关闭，1开启。
-    int checkmin;//滞留订单最早结束时间
-    int pretime;
-    int nowtime;
-    int minustime;
-    int state;//0：旧订单结束，1：新订单开始
-    int currentorder;
-    //建立临时变量
-    int i;
-    int j;
-    int k;
-    int temp;
-    char ch[51];
-    char c;
-    int n;
-    struct global *next;
+struct wHsstJ{//典屖叜釠
+    FILE *tEgKyGFm;
+    int xKyI;//xD:qD:LQ昊闼
+    int CErLMC;//xD:qD:LQ昊闼
+    int IAgFGB;//xD:qD:LQ昊闼
+    int vKsuGSGjuN;//餠哗科粌斃釧
+    int sKqsGSGjuN;//奧餦科粌斃釧
+    int ENhvGSGjuN;//讲卫整釠
+    int qHpFPKuF;//紋绵具闾讵卭釣E1
+    int qHpFPKCv;//紋绵恦夞讵卭釣E2
+    int HAqrBLIztAv;//滮畯讦卦釢
+    int IUwKxKMBqPi;//紋绵弄呀惘凍，0冇闵，1弐呅。
+    int sDitDKCv;//滮畯讦卦朓昁继杧昆阊
+    int FNiKBKy;
+    int DKAKBKy;
+    int CErLLRCuu;
+    int IPeKx;//0：旷许卙绤杲，1：旈讶卝弐姡
+    int sQvIxLNwHziI;
+    int PFANvLG;
+    int HJqJuXDE;
+    int IDeDx;
+    int JAqG;
+    int GJqu;
+    char sDyELFujy[51];
+    char PDeEzHCEuEqvBKO;
+    struct wHsstJ *DABK;
 };
-struct synthesis{//综合头指针
-    struct foodkind *food;
-    struct combination *comb;
-    struct order *orde;
-    struct global *glob;
-    struct synthesis *synt;
+struct IUrKACMqI{//缌吞夸挘钛
+    struct vKsuDGHl *vKsu;
+    struct sKqsBLuByKr *sKqs;
+    struct ENhvK *ENhv;
+    struct wHsstJ *wHss;
+    struct IUrKACMqI *IUrK;
 };
 
-//辅助函数
-int globalcorrectfood(struct foodkind food[],struct global globalvariables) {//返回餐品名称ch对应序号
-    for(globalvariables.n=0;globalvariables.n<globalvariables.foodnumber;globalvariables.n++) {
-        if(strcmp(globalvariables.ch,food[globalvariables.n].name)==0)
+//辕势刁斁
+int wHsstJwwHNitMDIwt(struct vKsuDGHl vKsu[],struct wHsstJ wHsstJPiHEesECM) {//迤围餔哒吠稈sDyELFujy尉庪库合
+    for(wHsstJPiHEesECM.GJqu=0;wHsstJPiHEesECM.GJqu<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.GJqu++) {
+        if(strcmp(wHsstJPiHEesECM.sDyELFujy,vKsu[wHsstJPiHEesECM.GJqu].Dwqv)==0)
             break;
     }
-    return globalvariables.n;
+    return wHsstJPiHEesECM.GJqu;
 }
-int globalcorrectcomb(struct combination comb[],struct global globalvariables) {//返回套餐名称ch对应序号
-    for(globalvariables.n=0;globalvariables.n<globalvariables.combnumber;globalvariables.n++) {
-        if(strcmp(globalvariables.ch,comb[globalvariables.n].name)==0)
+int wHsstJwwHNitMAIur(struct sKqsBLuByKr sKqs[],struct wHsstJ wHsstJPiHEesECM) {//迤围奛餡吠稈sDyELFujy封庤庥叻
+    for(wHsstJPiHEesECM.GJqu=0;wHsstJPiHEesECM.GJqu<wHsstJPiHEesECM.sKqsGSGjuN;wHsstJPiHEesECM.GJqu++) {
+        if(strcmp(wHsstJPiHEesECM.sDyELFujy,sKqs[wHsstJPiHEesECM.GJqu].Dwqv)==0)
             break;
     }
-    return globalvariables.n;
+    return wHsstJPiHEesECM.GJqu;
 }
-int globaltimeread(struct global globalvariables) {//将hh:mm:ss时间转化为时间戳
-    scanf("%d:%d:%d",&globalvariables.hour1,&globalvariables.minute1,&globalvariables.second1);
-    globalvariables.nowtime=globalvariables.second1+60*globalvariables.minute1+3600*globalvariables.hour1;
-    return globalvariables.nowtime;
+int wHsstJtimeread(struct wHsstJ wHsstJPiHEesECM) {//尖TH:HW:三上昒阌辂匚之昉阌扇
+    scanf("%d:%d:%d",&wHsstJPiHEesECM.xKyI,&wHsstJPiHEesECM.CErLMC,&wHsstJPiHEesECM.IAgFGB);
+    wHsstJPiHEesECM.DKAKBKy=wHsstJPiHEesECM.IAgFGB+60*wHsstJPiHEesECM.CErLMC+3600*wHsstJPiHEesECM.xKyI;
+    return wHsstJPiHEesECM.DKAKBKy;
 }
 int main(){
-    ///混淆片段1
-    struct synthesis synt;
-    synt.synt=&synt;
+    ///渇淜牋毆1
+    struct IUrKACMqI IUrK;
+    IUrK.IUrK=&IUrK;
     ///
-    //建立数据
-    struct global globalvariables;
-    ///混淆片段2
-    synt.glob=&globalvariables;
-    if(synt.glob==NULL) {
-        printf("error:globalvariables can't be founded.\nerror code:0x00000001");
+    //弊竡整捿
+    struct wHsstJ wHsstJPiHEesECM;
+    ///渇淜牋毆2
+    IUrK.wHss=&wHsstJPiHEesECM;
+    if(IUrK.wHss==NULL) {
+        printf("error:wHsstJPiHEesECM can't be founded.\nerror code:0x00000001");
         return 0;
     }
     ///
-    //读取菜单
-    globalvariables.fp=fopen("dict.dic","r");
-    ///混淆片段3
-    if(synt.glob->fp==NULL){
+    wHsstJPiHEesECM.tEgKyGFm=fopen("dict.dic","r");
+    ///渇淜牋毆3
+    if(IUrK.wHss->tEgKyGFm==NULL){
         printf("error:'dict.dic'can't be opened correctly.\nerror code:0x00000002");
         return 0;
     }
     ///
-    fscanf(globalvariables.fp,"%d%d",&globalvariables.foodnumber,&globalvariables.combnumber);//读取餐品数和套餐数
-    globalvariables.combnumber+=globalvariables.foodnumber;//单点商品也算作套餐
-    ///混淆片段4
-    if(synt.glob->foodnumber==0||synt.glob->combnumber==0){
-        printf("error:foodnumber or combnumber can't be read correctly.\nerror code:0x00000003");
+    fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d%d",&wHsstJPiHEesECM.vKsuGSGjuN,&wHsstJPiHEesECM.sKqsGSGjuN);//谋召餔哒斃咤奫餘斀
+    wHsstJPiHEesECM.sKqsGSGjuN+=wHsstJPiHEesECM.vKsuGSGjuN;//卥烏啊哒乲箯佰奟餠
+    ///渇淜牋毆4
+    if(IUrK.wHss->vKsuGSGjuN==0||IUrK.wHss->sKqsGSGjuN==0){
+        printf("error:vKsuGSGjuN or sKqsGSGjuN can't be read correctly.\nerror code:0x00000003");
         return 0;
     }
     ///
-    struct foodkind food[globalvariables.foodnumber];//创建餐品数组
-    synt.food=food;
-    ///混淆片段5
-    if(synt.food==NULL){
-        printf("error:food structure can't be founded correctly.\nerror code:0x00000004");
+    scanf("%d",&wHsstJPiHEesECM.ENhvGSGjuN);//谋召讦卦斃
+    ///渇淜牋毆8
+    if(IUrK.wHss->ENhvGSGjuN==0){
+        printf("error:ENhvrDQqsxP can't be read correctly.\nerror code:0x00000007");
         return 0;
     }
     ///
-    struct combination comb[globalvariables.combnumber];//创建套餐数组
-    synt.comb=comb;
-    ///混淆片段6
-    if(synt.food==NULL){
-        printf("error:combination structure can't be founded correctly.\nerror code:0x00000005");
+    struct vKsuDGHl vKsu[wHsstJPiHEesECM.vKsuGSGjuN];//别弐餔哒斃络
+    IUrK.vKsu=vKsu;
+    ///渇淜牋毆5
+    if(IUrK.vKsu==NULL){
+        printf("error:vKsu structure can't be founded correctly.\nerror code:0x00000004");
         return 0;
     }
     ///
-    for(globalvariables.i=0;globalvariables.i<globalvariables.foodnumber;globalvariables.i++) {//读取和创建餐品数据
-        fscanf(globalvariables.fp,"%s",globalvariables.ch);//读取餐品名称
-        strcpy(food[globalvariables.i].name,globalvariables.ch);
-        food[globalvariables.i].number=0;
-        food[globalvariables.i].max=0;
-        food[globalvariables.i].currenttime=0;
-        food[globalvariables.i].needtime=0;
-        food[globalvariables.i].usetimes=0;
-        strcpy(comb[globalvariables.i].name,globalvariables.ch);//将餐品也定义为套餐
-        comb[globalvariables.i].kindnumber=1;
-        comb[globalvariables.i].link[0]=&food[globalvariables.i];
-        comb[globalvariables.i].usetimes++;
-        if(globalvariables.i!=0)
-            food[globalvariables.i-1].next=&food[globalvariables.i];
-        if(globalvariables.i!=0)
-            comb[globalvariables.i-1].next=&comb[globalvariables.i];
+    struct sKqsBLuByKr sKqs[wHsstJPiHEesECM.sKqsGSGjuN];//别弐奛餡斃络
+    IUrK.sKqs=sKqs;
+    ///渇淜牋毆6
+    if(IUrK.vKsu==NULL){
+        printf("error:sKqsBLuByKr structure can't be founded correctly.\nerror code:0x00000005");
+        return 0;
     }
-    food[globalvariables.i-1].next=NULL;
-    for(globalvariables.i=0;globalvariables.i<globalvariables.foodnumber;globalvariables.i++) {//读取各餐品制作所需时间
-        fscanf(globalvariables.fp,"%d",&food[globalvariables.i].needtime);
+    ///
+    struct ENhvK ENhv[wHsstJPiHEesECM.ENhvGSGjuN];//别弐讦卦斃络
+    IUrK.ENhv=ENhv;
+    ///渇淜牋毆9
+    if(IUrK.ENhv==NULL){
+        printf("error:ENhvK structure can't be founded correctly.\nerror code:0x00000008");
+        return 0;
     }
-    for(globalvariables.i=0;globalvariables.i<globalvariables.foodnumber;globalvariables.i++) {//读取各餐品最大容量
-        fscanf(globalvariables.fp,"%d",&food[globalvariables.i].max);
+    ///
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召咐刬弍館哕數捾
+        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%s",wHsstJPiHEesECM.sDyELFujy);//谋召餔哒吠稈
+        strcpy(vKsu[wHsstJPiHEesECM.PFANvLG].Dwqv,wHsstJPiHEesECM.sDyELFujy);
+        vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].CwB=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm=0;
+        vKsu[wHsstJPiHEesECM.PFANvLG].KOiKBKyA=0;
+        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].Dwqv,wHsstJPiHEesECM.sDyELFujy);//尖餦哅买宭乡乎奟餠
+        sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN=1;
+        sKqs[wHsstJPiHEesECM.PFANvLG].BErB[0]=&vKsu[wHsstJPiHEesECM.PFANvLG];
+        sKqs[wHsstJPiHEesECM.PFANvLG].KOiKBKyA++;
+        if(wHsstJPiHEesECM.PFANvLG!=0)
+            vKsu[wHsstJPiHEesECM.PFANvLG-1].DABK=&vKsu[wHsstJPiHEesECM.PFANvLG];
+        if(wHsstJPiHEesECM.PFANvLG!=0)
+            sKqs[wHsstJPiHEesECM.PFANvLG-1].DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
     }
-    fscanf(globalvariables.fp,"%d%d",&globalvariables.allowmax,&globalvariables.allowmin);//读取系统关闭订单量w1，系统恢复订单量w2
-    ///混淆片段7
-    if(synt.glob->allowmax==0||synt.glob->allowmin==0){
+    vKsu[wHsstJPiHEesECM.PFANvLG-1].DABK=NULL;
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召合餡哔剎佰扈霐昌闸
+        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm);
+    }
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召合餡哔朘夻寁釟
+        fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d",&vKsu[wHsstJPiHEesECM.PFANvLG].CwB);
+    }
+    fscanf(wHsstJPiHEesECM.tEgKyGFm,"%d%d",&wHsstJPiHEesECM.qHpFPKuF,&wHsstJPiHEesECM.qHpFPKCv);//谋召糿绰円阅讶卝釟S1，糿绰恵夥讶卝釟S2
+    ///渇淜牋毆7
+    if(IUrK.wHss->qHpFPKuF==0||IUrK.wHss->qHpFPKCv==0){
         printf("error:w1 or w2 can't be read correctly.\nerror code:0x00000006");
         return 0;
     }
     ///
-    for(;globalvariables.i<globalvariables.combnumber;globalvariables.i++) {//读取多餐品套餐
-        fscanf(globalvariables.fp, "%s", globalvariables.ch);//读取套餐名称
-        strcpy(comb[globalvariables.i].name, globalvariables.ch);
-        comb[globalvariables.i].kindnumber = 0;
-        globalvariables.j = 0;
-        for (globalvariables.c =fgetc(globalvariables.fp);globalvariables.c==' '; globalvariables.c =fgetc(globalvariables.fp)) {//读取套餐中对应餐品名称并记录数据
-            fscanf(globalvariables.fp, "%s", globalvariables.ch);
-            comb[globalvariables.i].link[globalvariables.j] = &food[globalcorrectfood(food, globalvariables)];
-            globalvariables.j++;
-            comb[globalvariables.i].kindnumber++;
+    for(wHsstJPiHEesECM.PFANvLG=wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.sKqsGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召夞餡哔奯餤
+        fscanf(wHsstJPiHEesECM.tEgKyGFm, "%s", wHsstJPiHEesECM.sDyELFujy);//谋召奛餡吠稈
+        strcpy(sKqs[wHsstJPiHEesECM.PFANvLG].Dwqv, wHsstJPiHEesECM.sDyELFujy);
+        sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN = 0;
+        wHsstJPiHEesECM.HJqJuXDE = 0;
+        for (wHsstJPiHEesECM.PDeEzHCEuEqvBKO =fgetc(wHsstJPiHEesECM.tEgKyGFm);wHsstJPiHEesECM.PDeEzHCEuEqvBKO==' '; wHsstJPiHEesECM.PDeEzHCEuEqvBKO =fgetc(wHsstJPiHEesECM.tEgKyGFm)) {//谋召奛餡乀少庨餘哑吣秴庇诃彭斄捶
+            fscanf(wHsstJPiHEesECM.tEgKyGFm, "%s", wHsstJPiHEesECM.sDyELFujy);
+            sKqs[wHsstJPiHEesECM.PFANvLG].BErB[wHsstJPiHEesECM.HJqJuXDE] = &vKsu[wHsstJwwHNitMDIwt(vKsu, wHsstJPiHEesECM)];
+            wHsstJPiHEesECM.HJqJuXDE++;
+            sKqs[wHsstJPiHEesECM.PFANvLG].AEruGSGjuN++;
         }
-        if(globalvariables.i!=0)
-            comb[globalvariables.i-1].next=&comb[globalvariables.i];
+        if(wHsstJPiHEesECM.PFANvLG!=0)
+            sKqs[wHsstJPiHEesECM.PFANvLG-1].DABK=&sKqs[wHsstJPiHEesECM.PFANvLG];
     }
-    fclose(globalvariables.fp);
-
-    //读取输入
-    scanf("%d",&globalvariables.ordenumber);//读取订单数
-    ///混淆片段8
-    if(synt.glob->ordenumber==0){
-        printf("error:ordernumber can't be read correctly.\nerror code:0x00000007");
-        return 0;
-    }
-    ///
-    struct order orde[globalvariables.ordenumber];//创建订单数组
-    synt.orde=orde;
-    ///混淆片段9
-    if(synt.orde==NULL){
-        printf("error:order structure can't be founded correctly.\nerror code:0x00000008");
-        return 0;
-    }
-    ///
-    for(globalvariables.i=0;globalvariables.i<globalvariables.ordenumber;globalvariables.i++) {//读取订单数据
-        orde[globalvariables.i].begintime=globaltimeread(globalvariables);//读取各订单开始时间并转化为时间戳
-        orde[globalvariables.i].finishtime=0;
-        orde[globalvariables.i].state=0;
-        scanf("%s",globalvariables.ch);
-        globalvariables.j=globalcorrectcomb(comb,globalvariables);//找出订单对应套餐编号
-        orde[globalvariables.i].foodnumber=comb[globalvariables.j].kindnumber;
-        for(globalvariables.k=0;globalvariables.k<comb[globalvariables.j].kindnumber;globalvariables.k++) {
-            orde[globalvariables.i].link[globalvariables.k]=comb[globalvariables.j].link[globalvariables.k];
+    fclose(wHsstJPiHEesECM.tEgKyGFm);
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.ENhvGSGjuN;wHsstJPiHEesECM.PFANvLG++) {//谋召讦卦斃掆
+        ENhv[wHsstJPiHEesECM.PFANvLG].rAkzGRCuu=wHsstJtimeread(wHsstJPiHEesECM);//谋召合讳卨弘姟旾阄庌轰匧乍明阈戻
+        ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA=0;
+        ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx=0;
+        scanf("%s",wHsstJPiHEesECM.sDyELFujy);
+        wHsstJPiHEesECM.HJqJuXDE=wHsstJwwHNitMAIur(sKqs,wHsstJPiHEesECM);//抎刐讦卦尌庬奫餘缦名
+        ENhv[wHsstJPiHEesECM.PFANvLG].vKsuGSGjuN=sKqs[wHsstJPiHEesECM.HJqJuXDE].AEruGSGjuN;
+        for(wHsstJPiHEesECM.IDeDx=0;wHsstJPiHEesECM.IDeDx<sKqs[wHsstJPiHEesECM.HJqJuXDE].AEruGSGjuN;wHsstJPiHEesECM.IDeDx++) {
+            ENhv[wHsstJPiHEesECM.PFANvLG].BErB[wHsstJPiHEesECM.IDeDx]=sKqs[wHsstJPiHEesECM.HJqJuXDE].BErB[wHsstJPiHEesECM.IDeDx];
         }
-        if(globalvariables.i!=0)
-            orde[globalvariables.i-1].next=&orde[globalvariables.i];
+        if(wHsstJPiHEesECM.PFANvLG!=0)
+            ENhv[wHsstJPiHEesECM.PFANvLG-1].DABK=&ENhv[wHsstJPiHEesECM.PFANvLG];
     }
 
-    //当日营业
-    int check[globalvariables.allowmax+1];
-    for(globalvariables.i=0;globalvariables.i<=globalvariables.allowmax;globalvariables.i++) {
-        check[globalvariables.i]=90000;
+    //彣旻萩丫
+    int sDitD[wHsstJPiHEesECM.qHpFPKuF+1];
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<=wHsstJPiHEesECM.qHpFPKuF;wHsstJPiHEesECM.PFANvLG++) {
+        sDitD[wHsstJPiHEesECM.PFANvLG]=90000;
     }
-    ///混淆片段10
-    if(check[globalvariables.allowmax]!=90000){
-        printf("error:check structure can't be founded correctly.\nerror code:0x00000009");
+    ///渇淜牋毆10
+    if(sDitD[wHsstJPiHEesECM.qHpFPKuF]!=90000){
+        printf("error:sDitD structure can't be founded correctly.\nerror code:0x00000009");
         return 0;
     }
     ///
-    globalvariables.pretime=25200;
-    globalvariables.nowtime=orde[0].begintime;
-    globalvariables.state=1;//0：旧订单结束，1：新订单开始
-    globalvariables.currentorder=0;
-    globalvariables.systemstate=1;
-    globalvariables.remainorder=0;
-    while(globalvariables.currentorder<globalvariables.ordenumber){//订单循环
-        globalvariables.minustime =globalvariables. nowtime - globalvariables.pretime;
-        if(globalvariables.minustime!=0) {//进入下一时间节点，需要计算食物制作和系统状态判断
-            globalvariables.pretime = globalvariables.nowtime;
-            synt.food=food;///
-            //食物制作
-            for (globalvariables.i = 0; globalvariables.i < globalvariables.foodnumber; globalvariables.i++) {
-                if (food[globalvariables.i].number < food[globalvariables.i].max) {
-                    food[globalvariables.i].number += (globalvariables.minustime + food[globalvariables.i].currenttime) / food[globalvariables.i].needtime;
-                    food[globalvariables.i].currenttime = (globalvariables.minustime + food[globalvariables.i].currenttime) % food[globalvariables.i].needtime;
+    wHsstJPiHEesECM.FNiKBKy=25200;
+    wHsstJPiHEesECM.DKAKBKy=ENhv[0].rAkzGRCuu;
+    wHsstJPiHEesECM.IPeKx=1;//0：旷许卙绤杲，1：旈讶卝弐姡
+    wHsstJPiHEesECM.sQvIxLNwHziI=0;
+    wHsstJPiHEesECM.IUwKxKMBqPi=1;
+    wHsstJPiHEesECM.HAqrBLIztAv=0;
+    while(wHsstJPiHEesECM.sQvIxLNwHziI<wHsstJPiHEesECM.ENhvGSGjuN){//讲卫微珀
+        wHsstJPiHEesECM.CErLLRCuu =wHsstJPiHEesECM. DKAKBKy - wHsstJPiHEesECM.FNiKBKy;
+        if(wHsstJPiHEesECM.CErLLRCuu!=0) {//迫养丏丑昉阌芖烁，霐覗讥箨飲犁削佤咜紑绣狇怔刼旁
+            wHsstJPiHEesECM.FNiKBKy = wHsstJPiHEesECM.DKAKBKy;
+            IUrK.vKsu=vKsu;///
+            //飯牿刺佭
+            for (wHsstJPiHEesECM.PFANvLG = 0; wHsstJPiHEesECM.PFANvLG < wHsstJPiHEesECM.vKsuGSGjuN; wHsstJPiHEesECM.PFANvLG++) {
+                if (vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP < vKsu[wHsstJPiHEesECM.PFANvLG].CwB) {
+                    vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP += (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi) / vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm;
+                    vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi = (wHsstJPiHEesECM.CErLLRCuu + vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi) % vKsu[wHsstJPiHEesECM.PFANvLG].DAiuMGGm;
                 }
-                synt.food->usetimes++;///
-                if (food[globalvariables.i].number >= food[globalvariables.i].max) {
-                    food[globalvariables.i].number = food[globalvariables.i].max;
-                    food[globalvariables.i].currenttime = 0;
+                IUrK.vKsu->KOiKBKyA++;///
+                if (vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP >= vKsu[wHsstJPiHEesECM.PFANvLG].CwB) {
+                    vKsu[wHsstJPiHEesECM.PFANvLG].DQqsxP = vKsu[wHsstJPiHEesECM.PFANvLG].CwB;
+                    vKsu[wHsstJPiHEesECM.PFANvLG].sQvIxLNByIi = 0;
                 }
-                synt.food=synt.food->next;///
+                IUrK.vKsu=IUrK.vKsu->DABK;///
             }
-            //系统状态判断
-            if (globalvariables.remainorder > globalvariables.allowmax)
-                globalvariables.systemstate = 0;
-            if (globalvariables.remainorder < globalvariables.allowmin)
-                globalvariables.systemstate = 1;
+            //紋绵犺怒刷旅
+            if (wHsstJPiHEesECM.HAqrBLIztAv > wHsstJPiHEesECM.qHpFPKuF)
+                wHsstJPiHEesECM.IUwKxKMBqPi = 0;
+            if (wHsstJPiHEesECM.HAqrBLIztAv < wHsstJPiHEesECM.qHpFPKCv)
+                wHsstJPiHEesECM.IUwKxKMBqPi = 1;
         }
-        //处理订单
-        synt.orde=orde;
-        if (globalvariables.state == 1) {//有新增订单
-            if (globalvariables.systemstate == 1) {
-                orde[globalvariables.currentorder].state = 1;
-                orde[globalvariables.currentorder].finishtime = orde[globalvariables.currentorder].begintime;
-                for (globalvariables.j = 0; globalvariables.j < orde[globalvariables.currentorder].foodnumber; globalvariables.j++) {
-                    orde[globalvariables.currentorder].link[globalvariables.j]->number--;
-                    if (orde[globalvariables.currentorder].link[globalvariables.j]->number < 0)
-                        globalvariables.temp = -orde[globalvariables.currentorder].link[globalvariables.j]->number * orde[globalvariables.currentorder].link[globalvariables.j]->needtime - orde[globalvariables.currentorder].link[globalvariables.j]->currenttime+orde[globalvariables.currentorder].begintime;
-                    orde[globalvariables.currentorder].finishtime = (orde[globalvariables.currentorder].finishtime > globalvariables.temp ? orde[globalvariables.currentorder].finishtime : globalvariables.temp);
-                }//处理并计算结束时间
-                if (orde[globalvariables.currentorder].finishtime > orde[globalvariables.currentorder].begintime) {
-                    globalvariables.remainorder++;
-                    for (globalvariables.temp = 0; globalvariables.temp <= globalvariables.allowmax; globalvariables.temp++) {
-                        if (check[globalvariables.temp] == 90000) {
-                            check[globalvariables.temp] = orde[globalvariables.currentorder].finishtime;
+        //夔琜讦卦
+        IUrK.ENhv=ENhv;
+        if (wHsstJPiHEesECM.IPeKx == 1) {//朙旆墢讳卨
+            if (wHsstJPiHEesECM.IUwKxKMBqPi == 1) {
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].IPeKx = 1;
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
+                for (wHsstJPiHEesECM.HJqJuXDE = 0; wHsstJPiHEesECM.HJqJuXDE < ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vKsuGSGjuN; wHsstJPiHEesECM.HJqJuXDE++) {
+                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP--;
+                    if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP < 0)
+                        wHsstJPiHEesECM.JAqG = -ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DQqsxP * ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->DAiuMGGm - ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].BErB[wHsstJPiHEesECM.HJqJuXDE]->sQvIxLNByIi+ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
+                    ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA = (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA > wHsstJPiHEesECM.JAqG ? ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA : wHsstJPiHEesECM.JAqG);
+                }//夔琜幺讲箪绫杳旾阄
+                if (ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA > ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu) {
+                    wHsstJPiHEesECM.HAqrBLIztAv++;
+                    for (wHsstJPiHEesECM.JAqG = 0; wHsstJPiHEesECM.JAqG <= wHsstJPiHEesECM.qHpFPKuF; wHsstJPiHEesECM.JAqG++) {
+                        if (sDitD[wHsstJPiHEesECM.JAqG] == 90000) {
+                            sDitD[wHsstJPiHEesECM.JAqG] = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].vErzLFNqCA;
                             break;
                         }
                     }
                 }
             }
             else {
-                orde[globalvariables.currentorder].state = 2;
+                ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].IPeKx = 2;
             }
-            globalvariables.currentorder++;
-            synt.orde->usetimes++;///
-            synt.orde=synt.orde->next;///
+            wHsstJPiHEesECM.sQvIxLNwHziI++;
+            IUrK.ENhv->KOiKBKyA++;///
+            IUrK.ENhv=IUrK.ENhv->DABK;///
         }
-        if (globalvariables.state == 0) {//有结束订单
-            globalvariables.remainorder--;
-            for (globalvariables.temp = 0; globalvariables.temp <= globalvariables.allowmax; globalvariables.temp++) {
-                if (check[globalvariables.temp] == globalvariables.nowtime) {
-                    check[globalvariables.temp] = 90000;
+        if (wHsstJPiHEesECM.IPeKx == 0) {//朙绩杣讳卨
+            wHsstJPiHEesECM.HAqrBLIztAv--;
+            for (wHsstJPiHEesECM.JAqG = 0; wHsstJPiHEesECM.JAqG <= wHsstJPiHEesECM.qHpFPKuF; wHsstJPiHEesECM.JAqG++) {
+                if (sDitD[wHsstJPiHEesECM.JAqG] == wHsstJPiHEesECM.DKAKBKy) {
+                    sDitD[wHsstJPiHEesECM.JAqG] = 90000;
                     break;
                 }
             }
-            synt.orde->usetimes++;///
+            IUrK.ENhv->KOiKBKyA++;///
         }
-        //判断下一时间节点
-        for(globalvariables.i=0;globalvariables.i<=globalvariables.allowmax;globalvariables.i++){
-            globalvariables.checkmin=90000;
-            for (globalvariables.i = 0; globalvariables.i <= globalvariables.allowmax; globalvariables.i++){
-                globalvariables.checkmin=(globalvariables.checkmin<check[globalvariables.i]?globalvariables.checkmin:check[globalvariables.i]);
+        //刴旃丏丑昉阌芖烁
+        for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<=wHsstJPiHEesECM.qHpFPKuF;wHsstJPiHEesECM.PFANvLG++){
+            wHsstJPiHEesECM.sDitDKCv=90000;
+            for (wHsstJPiHEesECM.PFANvLG = 0; wHsstJPiHEesECM.PFANvLG <= wHsstJPiHEesECM.qHpFPKuF; wHsstJPiHEesECM.PFANvLG++){
+                wHsstJPiHEesECM.sDitDKCv=(wHsstJPiHEesECM.sDitDKCv<sDitD[wHsstJPiHEesECM.PFANvLG]?wHsstJPiHEesECM.sDitDKCv:sDitD[wHsstJPiHEesECM.PFANvLG]);
             }
-            if(globalvariables.checkmin>=orde[globalvariables.currentorder].begintime){
-                globalvariables.state=1;
-                globalvariables.nowtime = orde[globalvariables.currentorder].begintime;
+            if(wHsstJPiHEesECM.sDitDKCv>=ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu){
+                wHsstJPiHEesECM.IPeKx=1;
+                wHsstJPiHEesECM.DKAKBKy = ENhv[wHsstJPiHEesECM.sQvIxLNwHziI].rAkzGRCuu;
             }
             else{
-                globalvariables.state=0;
-                globalvariables.nowtime=globalvariables.checkmin;
+                wHsstJPiHEesECM.IPeKx=0;
+                wHsstJPiHEesECM.DKAKBKy=wHsstJPiHEesECM.sDitDKCv;
             }
         }
     }
 
-    //print
-    for(globalvariables.i=0;globalvariables.i<globalvariables.ordenumber;globalvariables.i++) {
+    //FNmEM
+    for(wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.ENhvGSGjuN;wHsstJPiHEesECM.PFANvLG++) {
 
-        if(orde[globalvariables.i].state==2)//orde[i]失败
+        if(ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx==2)//ENhv[wHsstJPiHEesECM.PFANvLG]奁贻
             printf("Fail\n");
-        else if(orde[globalvariables.i].state==1){//orde[i]成功
-            //将时间戳转化为hh:mm:ss时间
-            globalvariables.second1=orde[globalvariables.i].finishtime%60;
-            globalvariables.second2=globalvariables.second1%10;
-            globalvariables.second1=globalvariables.second1/10;
-            globalvariables.minute1=(orde[globalvariables.i].finishtime%3600)/60;
-            globalvariables.minute2=globalvariables.minute1%10;
-            globalvariables.minute1=globalvariables.minute1/10;
-            globalvariables.hour1=orde[globalvariables.i].finishtime/3600;
-            globalvariables.hour2=globalvariables.hour1%10;
-            globalvariables.hour1=globalvariables.hour1/10;
-            printf("%d%d:%d%d:%d%d\n",globalvariables.hour1,globalvariables.hour2,globalvariables.minute1,globalvariables.minute2,globalvariables.second1,globalvariables.second2);
+        else if(ENhv[wHsstJPiHEesECM.PFANvLG].IPeKx==1){//ENhv[wHsstJPiHEesECM.PFANvLG]戠劵
+            //尖昌闸扄轿匮乎FT:MH:丂三昢阐
+            wHsstJPiHEesECM.IAgFGB=ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA%60;
+            wHsstJPiHEesECM.CErLMC=(ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA%3600)/60;
+            wHsstJPiHEesECM.xKyI=ENhv[wHsstJPiHEesECM.PFANvLG].vErzLFNqCA/3600;
+            printf("%02d:%02d:%02d\n",wHsstJPiHEesECM.xKyI,wHsstJPiHEesECM.CErLMC,wHsstJPiHEesECM.IAgFGB);
         }
-        ///混淆片段11
+            ///渇淜牋毆11
         else
-            printf("error:order treated incorrectly.\nerror code:0x00000010");
+            printf("error:ENhvK treated incorrectly.\nerror code:0x00000010");
     }
     return 0;
 }
 //进程记录
 //完成全局变量结构体化
 //混淆/稀释
+//完成变量名和注释加密，加密方式：维吉尼亚密码加密
