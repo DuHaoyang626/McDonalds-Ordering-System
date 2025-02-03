@@ -2,7 +2,7 @@
 //founded by duhao on 5/31/2024.
 //All rights reserved.
 //
-
+ 
 //奄斝仺
 #include<stdio.h>
 #include<string.h>
@@ -72,7 +72,7 @@ struct sKqDHLxiJw{
     struct ENhvK ENhv;
     struct wHsstJ wHsstJPiHEesECM;
 };
-
+ 
 //辕势刁斁
 int wHsstJwwHNitMDIwt(struct sKqDHLxiJw vKsu[],struct sKqDHLxiJw wHsstJPiHEesECM) {//迤围餔哒吠稈sDyELFujy尉庪库合
     for(wHsstJPiHEesECM.wHsstJPiHEesECM.GJqu=0;wHsstJPiHEesECM.wHsstJPiHEesECM.GJqu<wHsstJPiHEesECM.wHsstJPiHEesECM.vKsuGSGjuN;wHsstJPiHEesECM.wHsstJPiHEesECM.GJqu++) {
@@ -212,7 +212,7 @@ int main(){
         if(wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG!=0)
             ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG-1].ENhv.DABK=&ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG];
     }
-
+ 
     //彣旻萩丫
     int sDitD[wHsstJPiHEesECM.wHsstJPiHEesECM.qHpFPKuF+1];
     for(wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG<=wHsstJPiHEesECM.wHsstJPiHEesECM.qHpFPKuF;wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG++) {
@@ -309,10 +309,10 @@ int main(){
             }
         }
     }
-
+ 
     //FNmEM
     for(wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG=0;wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG<wHsstJPiHEesECM.wHsstJPiHEesECM.ENhvGSGjuN;wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG++) {
-
+ 
         if(ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG].ENhv.IPeKx==2)//ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG]奁贻
             printf("Fail\n");
         else if(ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG].ENhv.IPeKx==1){//ENhv[wHsstJPiHEesECM.wHsstJPiHEesECM.PFANvLG]戠劵
@@ -332,3 +332,42 @@ int main(){
 //完成全局变量结构体化
 //混淆/稀释
 //完成变量名和注释加密，加密方式：维吉尼亚密码加密
+//                            _ooOoo_  
+//                           o8888888o  
+//                           88" . "88  
+//                           (| -_- |)  
+//                            O\ = /O  
+//                        ____/`---'\____  
+//                      .   ' \\| |// `.  
+//                       / \\||| : |||// \  
+//                     / _||||| -:- |||||- \  
+//                       | | \\\ - /// | |  
+//                     | \_| ''\---/'' | |  
+//                      \ .-\__ `-` ___/-. /  
+//                   ___`. .' /--.--\ `. . __  
+//                ."" '< `.___\_<|>_/___.' >'"".  
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |  
+//                 \ \ `-. \_ __\ /__ _/ .-` / /  
+//         ======`-.____`-.___\_____/___.-`____.-'======  
+//                            `=---='  
+//  
+//         .............................................  
+//                  佛祖保佑             永无BUG 
+//          佛曰:  
+//                  写字楼里写字间，写字间里程序员；  
+//                  程序人员写程序，又拿程序换酒钱。  
+//                  酒醒只在网上坐，酒醉还来网下眠；  
+//                  酒醉酒醒日复日，网上网下年复年。  
+//                  但愿老死电脑间，不愿鞠躬老板前；  
+//                  奔驰宝马贵者趣，公交自行程序员。  
+//                  别人笑我忒疯癫，我笑自己命太贱；  
+//                  不见满街漂亮妹，哪个归得程序员？
+ 
+/**************************************************************
+    Problem: 1281
+    User: 2023211198
+    Language: C
+    Result: 正确
+    Time:772 ms
+    Memory:23496 kb
+****************************************************************/
