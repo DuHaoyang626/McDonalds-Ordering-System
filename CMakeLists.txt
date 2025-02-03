@@ -1,11 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
-project(multfiletest)
+project(multfiletest2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(
-        multfiletest main.cpp
-        testa.cpp
-        testb.cpp
-        testc.h
-        testc.cpp)
+add_executable(multfiletest2 main.cpp
+        file1.cpp
+        file1.h
+        file1.cpp)

@@ -9,3 +9,4 @@
 /cmake-build-debug/
 /.idea/
 main.exe
+.idea/workspace.xml

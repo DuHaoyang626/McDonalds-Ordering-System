@@ -1,11 +1,6 @@
 #include<stdio.h>
-#include"testc.h"
-void testb(int,int);
-int main() {
-    void testa();
-    printf("main\n");
-    testa();
-    testb(1,1);
-    testc();
-    return 0;
+int main(){
+    auto  part_auto=0;
+    register int part_register;
+    static int part_static;
 }
