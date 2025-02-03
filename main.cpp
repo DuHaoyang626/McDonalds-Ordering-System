@@ -1,34 +1,17 @@
 #include<stdio.h>
 #include<string.h>
-struct foodkind{
-    char name[51];//名称
-    int number;//当前数量
-    int max;//最大数量
-    int currenttime;//当前已制作时间
-    int needtime;//制作所需时间
-};
 struct combination{
     char name[51];
     int kindnumber;
-    struct foodkind *link[5];
+    int link[5];
 };
 struct order{
     int begintime;
     int finishtime;
     int foodnumber;
-    int remainfoodnumber;
-    int state;
-    struct foodkind *link[5];
-    int provided[5];
+    int state;//0未开始，1成功，2失败
+    int link[5];
 };
-int correctfood(char ch[],struct foodkind food[],int foodnumber) {//返回餐品名称ch对应序号
-    int n;
-    for(n=0;n<foodnumber;n++) {
-        if(strcmp(ch,food[n].name)==0)
-            break;
-    }
-    return n;
-}
 int correctcomb(char ch[],struct combination comb[],int combnumber) {//返回套餐名称ch对应序号
     int n;
     for(n=0;n<combnumber;n++) {
@@ -61,30 +44,36 @@ int main(){
     int i;
     int j;
     int k;
+    int ccc;
+    int temp;
     char ch[51]={0};
     char c;
     FILE *fp;
     fp=fopen("dict.dic","r");
     fscanf(fp,"%d%d",&foodnumber,&combnumber);//读取餐品数和套餐数
     combnumber+=foodnumber;//单点商品也算作套餐
-    struct foodkind food[foodnumber];
+    char name[foodnumber][51];//名称r
+    int number[foodnumber];//当前数量
+    int max[foodnumber];//最大数量
+    int currenttime[foodnumber];//当前已制作时间
+    int needtime[foodnumber];//制作所需时间
     struct combination comb[combnumber];
     for(i=0;i<foodnumber;i++) {
         fscanf(fp,"%s",ch);//读取餐品名称
-        strcpy(food[i].name,ch);
-        food[i].number=0;
-        food[i].max=0;
-        food[i].currenttime=-1;
-        food[i].needtime=0;
+        strcpy(name[i],ch);
+        number[i]=0;
+        max[i]=0;
+        currenttime[i]=0;
+        needtime[i]=0;
         strcpy(comb[i].name,ch);//将餐品也定义为套餐
         comb[i].kindnumber=1;
-        comb[i].link[0]=&food[i];
+        comb[i].link[0]=i;
     }
     for(i=0;i<foodnumber;i++) {
-        fscanf(fp,"%d",&food[i].needtime);
+        fscanf(fp,"%d",&needtime[i]);
     }//读取各餐品制作所需时间
     for(i=0;i<foodnumber;i++) {
-        fscanf(fp,"%d",&food[i].max);
+        fscanf(fp,"%d",&max[i]);
     }//读取各餐品最大容量
     fscanf(fp,"%d%d",&allowmax,&allowmin);//读取系统关闭订单量w1，系统恢复订单量w2
     for(;i<combnumber;i++) {//读取多餐品套餐
@@ -94,10 +83,13 @@ int main(){
         j = 0;
         for (c =fgetc(fp); c==' '; c =fgetc(fp)) {
             fscanf(fp, "%s", ch);
-            comb[i].link[j] = &food[correctfood(ch, food, foodnumber)];
+            for(k=0;k<foodnumber;k++){
+                if(strcmp(ch,name[k])==0)
+                    break;
+            }
+            comb[i].link[j] = k;
             j++;
             comb[i].kindnumber++;
-
         }
     }
     scanf("%d",&ordenumber);//读取订单数
@@ -108,85 +100,94 @@ int main(){
         orde[i].state=0;
         scanf("%s",ch);
         j=correctcomb(ch,comb,combnumber);//找出订单对应套餐编号
-        orde[i].remainfoodnumber=comb[j].kindnumber;
         orde[i].foodnumber=comb[j].kindnumber;
         for(k=0;k<comb[j].kindnumber;k++) {
             orde[i].link[k]=comb[j].link[k];
-            orde[i].provided[k]=0;
         }
     }
     //当日营业
-    for(time=25200;time<86400;time++) {//按秒循环
-        //制作食物
-        for (i = 0; i < foodnumber; i++) {
-            if (food[i].number < food[i].max) {
-                food[i].currenttime++;
-                if (food[i].currenttime == food[i].needtime) {
-                    food[i].number++;
-                    food[i].currenttime = 0;
-                }
-            }
-        }
-
-        //点单处理
-        //系统状态判断
-        if (remainorder > allowmax)
-            systemstate = 0;
-        if (remainorder < allowmin)
-            systemstate = 1;
-
-        //订单处理
-        for(i=0;i<ordenumber;i++) {
-            if(orde[i].begintime>time)//未开始
-                break;
-            if(orde[i].begintime==time) {//开始时
-                if(systemstate==1) {//系统开放点单
-                    orde[i].state=1;//订单进行中
-                    remainorder++;
-                    for(j=0;j<orde[i].foodnumber;j++){
-                        if(orde[i].provided[j]==0){
-                            if(orde[i].link[j]->number!=0){
-                                orde[i].link[j]->number--;
-                                orde[i].provided[j]=1;
-                                orde[i].remainfoodnumber--;
-                            }
-                        }
-                    }
-                    //判断订单是否完成
-                    if(orde[i].remainfoodnumber==0) {
-                        orde[i].state = 2;
-                        orde[i].finishtime = time;
-                        remainorder--;
-                    }
-                }
-                else {//系统暂停点餐
-                    orde[i].state=3;//点单失败
-                }
-            }
-            else {
-                if (orde[i].state == 2 || orde[i].state == 3)//订单已结束（完成/失败）
-                    continue;
-                else {//订单进行中
-                    //配餐
-                    for (j = 0; j < orde[i].foodnumber; j++) {
-                        if (orde[i].provided[j] == 0) {
-                            if (orde[i].link[j]->number != 0) {
-                                orde[i].link[j]->number--;
-                                orde[i].provided[j] = 1;
-                                orde[i].remainfoodnumber--;
-                            }
-                        }
-                    }
-                    //判断订单是否完成
-                    if (orde[i].remainfoodnumber == 0) {
-                        orde[i].state = 2;
-                        orde[i].finishtime = time;
-                        remainorder--;
-                    }
-                }
-            }
-        }
+    k=0;
+    int check[allowmax+3];
+    for(i=0;i<=allowmax+2;i++) {
+        check[i]=90000;
     }
+    int pretime=25200,nowtime=orde[0].begintime,minustime,/*kk*/state=1;//0：旧订单结束，1：新订单开始，2：both
+    while(k<ordenumber) {
+        //制作食物
+        minustime = nowtime - pretime;
+        for (i = 0; i < foodnumber; i++) {
+            if (number[i] < max[i]) {
+                number[i] += (minustime + currenttime[i]) / needtime[i];
+                currenttime[i] = (minustime + currenttime[i]) % needtime[i];
+            }
+            if (number[i] >= max[i]) {
+                number[i] = max[i];
+                currenttime[i] = 0;
+            }
+        }
+        pretime = nowtime;
+        //判断新增订单还是结束旧订单
+        if (state == 1 || state == 2) {//有新增订单
+            if (remainorder > allowmax)
+                systemstate = 0;
+            if (remainorder < allowmin)
+                systemstate = 1;
+            if (systemstate == 1) {
+                orde[k].state = 1;
+                orde[k].finishtime = orde[k].begintime;
+                for (j = 0; j < orde[k].foodnumber; j++) {
+                    //orde[k].link[j]->number--;
+                    number[orde[k].link[j]]--;
+                    if (number[orde[k].link[j]] < 0)
+                        temp = -number[orde[k].link[j]] * needtime[orde[k].link[j]] - currenttime[orde[k].link[j]]+orde[k].begintime;
+                    orde[k].finishtime = (orde[k].finishtime > temp ? orde[k].finishtime : temp);
+                }//处理并计算结束时间
+                if (orde[k].finishtime > orde[k].begintime) {
+                    remainorder++;
+
+                    for (temp = 0; temp <= allowmax+2; temp++) {
+                        if (check[temp] == 90000) {
+                            check[temp] = orde[k].finishtime;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                orde[k].state = 3;
+            }
+            k++;
+        }
+        if (state == 0 || state == 2) {
+            remainorder--;
+            for (temp = 0; temp <= allowmax+2; temp++) {
+                if (check[temp] == nowtime) {
+                    check[temp] = 90000;
+                    break;
+                }
+            }
+
+        }
+        if (k < ordenumber) {
+            nowtime = orde[k].begintime;
+            ccc=90000;
+            for (i = 0; i <= allowmax+2; i++){
+                ccc=(ccc<check[i]?ccc:check[i]);
+            }
+            if(ccc==nowtime)
+                state=2;
+            if(ccc<nowtime){
+                nowtime=ccc;
+                state=0;
+            }
+            if(ccc>nowtime)
+                state=1;
+//                nowtime = (nowtime < check[i] ? nowtime : check[i]);
+//            nowtime = orde[k].begintime;
+        }
+        else
+            break;
+    }
+
     //print
     for(i=0;i<ordenumber;i++) {
         if(orde[i].state==3)//orde[i]失败
