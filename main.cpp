@@ -5,7 +5,7 @@
 
 //建立结构体
 struct foodkind {//食物种类
-    char name[50];//名称
+    char name[51];//名称
     int number;//当前数量
     int max;//最大数量
     int currenttime;//当前已制作时间
@@ -16,7 +16,7 @@ struct combinationlink {//套餐对应链表
     struct combinationlink *next;//下一餐品
 };
 struct combination {//套餐
-    char name[50];//名称
+    char name[51];//名称
     int kindnumber;//餐品数量
     struct combinationlink *kind;//餐品名称
 };
@@ -48,9 +48,9 @@ int correctcomb(char ch[],struct combination comb[],int combnumber) {//返回套
             return n;
     }
 }
-int timeread(FILE *fp) {//将hh:mm:ss时间转化为时间戳
+int timeread() {//将hh:mm:ss时间转化为时间戳
     int hour=0,minute=0,second=0,time=0;
-    fscanf(fp,"%d:%d:%d",&hour,&minute,&second);
+    scanf("%d:%d:%d",&hour,&minute,&second);
     time=second+60*minute+3600*hour;
     return time;
 }
@@ -77,7 +77,7 @@ int main() {
     int i=0;
     int j=0;
     int k=0;
-    char ch[50]={0};
+    char ch[51]={0};
     char c=0;
     struct combinationlink *combinationlinknewp;
     struct combinationlink *combinationlinkcurp;
@@ -136,15 +136,14 @@ int main() {
     fclose(fp);
 
     //读取输入
-    fp=fopen("input.txt","r");
-    fscanf(fp,"%d",&ordenumber);//读取订单数
+    scanf("%d",&ordenumber);//读取订单数
     struct order orde[ordenumber];
     for(i=0;i<ordenumber;i++) {
-        orde[i].begintime=timeread(fp);//读取各订单开始时间并转化为时间戳
+        orde[i].begintime=timeread();//读取各订单开始时间并转化为时间戳
         orde[i].finishtime=0;
         orde[i].kind=NULL;
         orde[i].state=0;
-        fscanf(fp,"%s",ch);
+        scanf("%s",ch);
         j=correctcomb(ch,comb,combnumber);//找出订单对应套餐编号
         orde[i].remainfoodnumber=comb[j].kindnumber;//将套餐信息复制给订单
         combinationlinknewp=comb[j].kind;
@@ -164,7 +163,6 @@ int main() {
         }
         orderlinkcurp->next=NULL;
     }
-    fclose(fp);
 
     //当日营业
     for(time=25200;time<86400;time++) {//按秒循环
@@ -180,13 +178,13 @@ int main() {
         }
 
         //点单处理
-          //系统状态判断
+        //系统状态判断
         if(remainorder>allowmax)
             systemstate=0;
         if(remainorder<allowmin)
             systemstate=1;
 
-          //订单处理
+        //订单处理
         for(i=0;i<ordenumber;i++) {
             if(orde[i].begintime>time)//未开始
                 break;
@@ -239,8 +237,11 @@ int main() {
                     }
                 }
             }
+
+
         }
     }
+
 
     //print
     for(i=0;i<ordenumber;i++) {
@@ -262,32 +263,7 @@ int main() {
         }
     }
 
-    //释放各链表占用空间
-    for(i=0;i<ordenumber;i++) {
-        orderlinkcurp=orde[i].kind;
-        orderlinknewp=orderlinkcurp->next;
-        orde[i].kind=NULL;
-        while(orderlinknewp!=NULL) {
-            free(orderlinkcurp);
-            orderlinkcurp=orderlinknewp;
-            orderlinknewp=orderlinkcurp->next;
-        }
-        free(orderlinkcurp);
-    }
-    orderlinkcurp=NULL;
 
-    for(i=0;i<combnumber;i++) {
-        combinationlinkcurp=comb[i].kind;
-        combinationlinknewp=combinationlinkcurp->next;
-        comb[i].kind=NULL;
-        while(combinationlinknewp!=NULL) {
-            free(combinationlinkcurp);
-            combinationlinkcurp=combinationlinknewp;
-            combinationlinknewp=combinationlinkcurp->next;
-        }
-        free(combinationlinkcurp);
-    }
-    combinationlinkcurp=NULL;
 
     return 0;
 }
