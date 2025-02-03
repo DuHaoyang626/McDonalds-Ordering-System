@@ -6,15 +6,24 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "C:/code/software/Qt6.7.1/6.7.1/mingw_64")
+set(CMAKE_PREFIX_PATH "C:/Qt/Qt5.14.0/5.14.0/mingw73_64")
 
-find_package(Qt6 COMPONENTS
+find_package(Qt5 COMPONENTS
         Core
+        Gui
+        Widgets
         REQUIRED)
 
-add_executable(McDonalds_Ordering_System main.cpp)
-target_link_libraries(Qt6test
-        Qt::Core
+add_executable(McDonalds_Ordering_System main.cpp
+        dict.cpp
+        homepage.cpp
+        mainwindow.cpp
+        panel_body.cpp
+        startpage.cpp)
+target_link_libraries(McDonalds_Ordering_System
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Widgets
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -38,10 +47,10 @@ if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
                 "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
     endif ()
-    foreach (QT_LIB Core)
+    foreach (QT_LIB Core Gui Widgets)
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
-                "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"
+                "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll"
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
     endforeach (QT_LIB)
 endif ()
