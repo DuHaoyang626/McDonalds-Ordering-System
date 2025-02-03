@@ -70,6 +70,7 @@ struct commondata{
     struct vKsuDGHl vKsu;
     struct sKqsBLuByKr sKqs;
     struct ENhvK ENhv;
+    struct wHsstJ IUrK;
 };
 
 //辕势刁斁
