@@ -1,5 +1,9 @@
-# McDonalds_Ordering_System
+# McDonalds-Ordering-System
 北京邮电大学-计算机学院-2023级-计算导论与程序设计课程设计-大作业-麦当劳订餐系统
+---
+项目GitHub地址：[https://github.com/DuHaoyang626/McDonalds-Ordering-System](https://github.com/DuHaoyang626/McDonalds-Ordering-System)  
+项目Giteeitee地址：[https://gitee.com/du-hao-yang/McDonalds-Ordering-System](https://gitee.com/du-hao-yang/McDonalds-Ordering-System)  
+仅供学习参考，请勿直接用于作业提交
 
 ---
 ## 代码日志
