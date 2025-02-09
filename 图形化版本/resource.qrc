@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>Images/background.png</file>
+        <file>Images/bottomBar.png</file>
+        <file>Images/logo.png</file>
+        <file>Images/one1.png</file>
+        <file>Images/one2.png</file>
+        <file>Images/one3.png</file>
+        <file>Images/one4.png</file>
+        <file>Images/one5.png</file>
+        <file>Images/one6.png</file>
+        <file>Images/one7.png</file>
+        <file>Images/one8.png</file>
+        <file>Images/one9.png</file>
+        <file>Images/one10.png</file>
+        <file>Images/one11.png</file>
+        <file>Images/one12.png</file>
+        <file>Images/one13.png</file>
+        <file>Images/one14.png</file>
+        <file>Images/one15.png</file>
+        <file>Images/one16.png</file>
+        <file>Images/one17.png</file>
+        <file>Images/one18.png</file>
+        <file>Images/one19.png</file>
+        <file>Images/more1.png</file>
+        <file>Images/more2.png</file>
+        <file>Images/more3.png</file>
+        <file>Images/more4.png</file>
+        <file>Images/more5.png</file>
+        <file>Images/more6.png</file>
+        <file>Images/more7.png</file>
+    </qresource>
+</RCC>
